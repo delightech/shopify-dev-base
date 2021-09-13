@@ -1,6 +1,6 @@
 import './App.css';
 import enTranslations from '@shopify/polaris/locales/ja.json';
-import {AppProvider, Page, Card, Button} from '@shopify/polaris';
+import { AppProvider, Page, Card, Button } from '@shopify/polaris';
 
 function App() {
   return (
