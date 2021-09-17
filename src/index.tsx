@@ -1,17 +1,19 @@
-import React from 'react';
-import { Redirect } from '@shopify/app-bridge/actions';
-import ReactDOM from 'react-dom';
-import { AppProvider } from '@shopify/polaris';
 import createApp from '@shopify/app-bridge';
 import { Provider } from '@shopify/app-bridge-react';
-import '@shopify/polaris/dist/styles.css';
+import { Redirect } from '@shopify/app-bridge/actions';
+import { AppProvider } from '@shopify/polaris';
 import translations from '@shopify/polaris/locales/ja.json';
 import { initializeApp } from 'firebase/app';
 import * as queryString from 'query-string';
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '@shopify/polaris/dist/styles.css';
 import App from './App';
 
 import {
   FIREBASE_API_KEY,
+  FIREBASE_FUNCTION_URL,
   FIREBASE_PROJECT_ID,
   SHOPIFY_API_KEY,
   SHOPIFY_API_SCOPES,
@@ -23,7 +25,7 @@ const shopDomain = parsed.shop as string;
 // パラメータでcodeとhmacが渡される。
 // hmacで正しいリクエストであることを確認。その後codeをaccess_tokenに変換する。（DB保持が必要？）
 // TODO codeをaccess_tokenに変換するfunctionsを作成する。そのURLをredirectUriに指定する
-const redirectUri = 'allowed redirect URI from Shopify Partner Dashboard';
+const redirectUri = `${FIREBASE_FUNCTION_URL}/callbackFromAuth`;
 const permissionUrl = `https://${shopDomain}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SHOPIFY_API_SCOPES}&redirect_uri=${redirectUri}`;
 
 const config = {
@@ -43,7 +45,7 @@ initializeApp({
   projectId: FIREBASE_PROJECT_ID,
 });
 
-ReactDOM.render (
+ReactDOM.render(
   <React.StrictMode>
     <AppProvider i18n={translations}>
       <Provider config={config}>
@@ -51,5 +53,5 @@ ReactDOM.render (
       </Provider>
     </AppProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
