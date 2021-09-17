@@ -5,7 +5,7 @@ import {
 SHOPIFY_API_KEY, SHOPIFY_APP_NAME, SHOPIFY_SHARED_SECRET,
 } from './configs';
 
-export const callbackForOfflineAccess = functions
+export const callbackFromAuth = functions
   .region('asia-northeast1')
   .runWith({ timeoutSeconds: 60, memory: '128MB' })
   .https.onRequest(async (request, response) => {
@@ -29,7 +29,6 @@ export const callbackForOfflineAccess = functions
     const myshopifyDomain = request.query.shop as string;
     const redirectUrl = `https://${myshopifyDomain}/admin/apps/${SHOPIFY_APP_NAME}`;
 
-    // TODO: Remove any type
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = await shopifyToken.getAccessToken(myshopifyDomain, code).catch(() => null);
     if (!data) {
@@ -51,8 +50,9 @@ export const callbackForOfflineAccess = functions
     await admin
       .auth()
       .createUser({ uid: myshopifyDomain })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then(async (user) => {
-        console.log('createUser');
+        functions.logger.info('createUser');
       });
 
     functions.logger.info(`created new shop ${myshopifyDomain}`);
