@@ -29,12 +29,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "ci": "rm -rf ./node_modules && yarn install && typesync && yarn install --ignore-scripts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'; cd functions/ && eslint 'src/**/*.{js,ts}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'; cd functions/ && eslint --fix 'src/**/*.{js,ts}"
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'; cd functions/ && eslint --fix 'src/**/*.{js,ts}'"
   },
   "eslintConfig": {
     "extends": [
@@ -56,13 +57,31 @@
   },
   "devDependencies": {
     "@types/eslint": "^7.28.0",
+    "@types/eslint-plugin-prettier": "^3.1.0",
+    "@types/prettier": "^2.3.2",
+    "@types/stylelint": "^13.13.2",
+    "@types/testing-library__jest-dom": "^5.14.1",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.4.1",
+    "prettier-stylelint": "^0.4.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-order": "^4.1.0",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "ts-node": "^10.2.1",
+    "typesync": "^0.8.0"
   }
 }
