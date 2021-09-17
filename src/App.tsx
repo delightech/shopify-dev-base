@@ -1,10 +1,12 @@
+import {
+ AppProvider, Page, Card, Button,
+} from '@shopify/polaris';
 import enTranslations from '@shopify/polaris/locales/ja.json';
-import React from 'react'
-import { AppProvider, Page, Card, Button } from '@shopify/polaris';
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
 
-function App() {
-  return (
-    <AppProvider i18n={enTranslations}>
+const App = () => (
+  <AppProvider i18n={enTranslations}>
     <Page title="Example app">
       <Card sectioned>
         <Button onClick={() => alert('Button clicked!')}>Example button</Button>
@@ -12,6 +14,5 @@ function App() {
     </Page>
   </AppProvider>
   );
-}
 
 export default App;
