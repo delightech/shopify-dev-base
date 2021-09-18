@@ -8,7 +8,7 @@ import React from 'react';
 // eslint-disable-next-line no-alert
 const test = () => { return alert('Button clicked!'); };
 
-const App: React.FC = () => {
+export const App = () => {
   return (
     <AppProvider i18n={enTranslations}>
       <Page title="Example app">
@@ -19,4 +19,3 @@ const App: React.FC = () => {
     </AppProvider>
   );
 };
-export default App;
