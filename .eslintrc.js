@@ -29,6 +29,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'jest', 'jsx-a11y', 'prefer-arrow', 'react', 'react-hooks'],
   root: true, // 親ディレクトリの設定ファイルを読み込まないように設定
   rules: {
+    'arrow-body-style': ['error', 'always'],
     'sort-imports': 0,
     'import/order': [2, { alphabetize: { order: 'asc' } }],
     'newline-before-return': 'warn',

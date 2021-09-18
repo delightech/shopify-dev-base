@@ -6,16 +6,17 @@ import enTranslations from '@shopify/polaris/locales/ja.json';
 import React from 'react';
 
 // eslint-disable-next-line no-alert
-const test = () => alert('Button clicked!');
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const App = () => (
-  <AppProvider i18n={enTranslations}>
-    <Page title="Example app">
-      <Card sectioned>
-        <Button onClick={test}>Example button</Button>
-      </Card>
-    </Page>
-  </AppProvider>
-  );
+const test = () => { return alert('Button clicked!'); };
 
+export const App: React.FC = () => {
+  return (
+    <AppProvider i18n={enTranslations}>
+      <Page title="Example app">
+        <Card sectioned>
+          <Button onClick={test}>Example button</Button>
+        </Card>
+      </Page>
+    </AppProvider>
+  );
+};
 export default App;
