@@ -25,21 +25,19 @@ const init = () => {
   // emulator URL
   // http://localhost:5000/?shop=delightech3.myshopify.com
   const query = queryString.parse(window.location.search);
-  const shopDomain = query.shop as string;
+  const shop = query.shop as string;
+  const host = query.host as string;
   // アプリインストール後、ここで指定するURLへリダイレクトされる。
   // パラメータでcodeとhmacが渡される。
   // hmacで正しいリクエストであることを確認。その後codeをaccess_tokenに変換する。（DB保持が必要？）
   // TODO codeをaccess_tokenに変換するfunctionsを作成する。そのURLをredirectUriに指定する
   const redirectUri = `${FIREBASE_FUNCTION_URL}/callbackFromAuth`;
-  const permissionUrl = `https://${shopDomain}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SHOPIFY_API_SCOPES}&redirect_uri=${redirectUri}`;
+  const permissionUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SHOPIFY_API_SCOPES}&redirect_uri=${redirectUri}`;
 
   const config = {
     apiKey: SHOPIFY_API_KEY,
-    host: shopDomain,
+    host: host,
   };
-
-  // eslint-disable-next-line no-console
-  console.log(permissionUrl);
 
   if (window.top === window.self) {
     window.location.assign(permissionUrl);
