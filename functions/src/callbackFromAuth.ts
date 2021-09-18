@@ -12,7 +12,7 @@ export const callbackFromAuth = functions
   .region('asia-northeast1')
   .runWith({ timeoutSeconds: 60, memory: '128MB' })
   .https.onRequest(async (request, response) => {
-    const param = { request };
+    const param = request;
     functions.logger.info('###callbackFromAuth###', param);
     functions.logger.debug(SHOPIFY_SHARED_SECRET, SHOPIFY_API_KEY);
 
@@ -35,7 +35,8 @@ export const callbackFromAuth = functions
     functions.logger.debug(redirectUrl);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data: any = await shopifyToken.getAccessToken(myshopifyDomain, code).catch(() => null);
+    const data: any = await shopifyToken.getAccessToken(myshopifyDomain, code)
+      .catch(() => { return null; });
     if (!data) {
       response.status(400).send('Failed to get Shopify access token');
 
