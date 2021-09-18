@@ -19,7 +19,6 @@ import {
 
 const init = () => {
   // eslint-disable-next-line no-console
-  console.log('##################');
   console.log(process.env.NODE_ENV);
   // emulator URL
   // http://localhost:5000/?shop=delightech3.myshopify.com
@@ -37,6 +36,7 @@ const init = () => {
     host: shopDomain,
   };
 
+  // eslint-disable-next-line no-console
   console.log(permissionUrl);
 
   if (window.top === window.self) {

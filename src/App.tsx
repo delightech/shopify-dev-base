@@ -8,7 +8,7 @@ import React from 'react';
 // eslint-disable-next-line no-alert
 const test = () => { return alert('Button clicked!'); };
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
     <AppProvider i18n={enTranslations}>
       <Page title="Example app">
