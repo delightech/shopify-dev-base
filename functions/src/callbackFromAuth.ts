@@ -5,6 +5,9 @@ import {
 SHOPIFY_API_KEY, SHOPIFY_APP_NAME, SHOPIFY_SHARED_SECRET,
 } from './configs';
 
+// example url
+// https://asia-northeast1-***REMOVED***.cloudfunctions.net/callbackFromAuth?code=85c46a18d3842471550968d661470740&hmac=9e49b55143312005a15560565f1e64219263375ffa7bb2460fb0ba38601bd01e&host=ZGVsaWdodGVjaDMubXlzaG9waWZ5LmNvbS9hZG1pbg&shop=delightech3.myshopify.com&timestamp=1631944245
+// http://localhost:5001/***REMOVED***/asia-northeast1/callbackFromAuth?code=85c46a18d3842471550968d661470740&hmac=9e49b55143312005a15560565f1e64219263375ffa7bb2460fb0ba38601bd01e&host=ZGVsaWdodGVjaDMubXlzaG9waWZ5LmNvbS9hZG1pbg&shop=delightech3.myshopify.com&timestamp=1631944246
 export const callbackFromAuth = functions
   .region('asia-northeast1')
   .runWith({ timeoutSeconds: 60, memory: '128MB' })
@@ -29,6 +32,8 @@ export const callbackFromAuth = functions
     const myshopifyDomain = request.query.shop as string;
     const redirectUrl = `https://${myshopifyDomain}/admin/apps/${SHOPIFY_APP_NAME}`;
 
+    functions.logger.debug(redirectUrl);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = await shopifyToken.getAccessToken(myshopifyDomain, code).catch(() => null);
     if (!data) {
@@ -46,14 +51,6 @@ export const callbackFromAuth = functions
       return;
     // eslint-disable-next-line no-empty
     } catch {}
-
-    await admin
-      .auth()
-      .createUser({ uid: myshopifyDomain })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .then(async (user) => {
-        functions.logger.info('createUser');
-      });
 
     functions.logger.info(`created new shop ${myshopifyDomain}`);
 
