@@ -45,7 +45,7 @@ const init = () => {
     window.location.assign(permissionUrl);
   } else {
     const app = createApp(config);
-    Redirect.create(app).dispatch(Redirect.Action.REMOTE, permissionUrl);
+    Redirect.create(app).dispatch(Redirect.Action.APP, '/');
   }
 
   initializeApp({
