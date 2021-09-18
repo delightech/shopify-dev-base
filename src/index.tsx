@@ -1,6 +1,4 @@
-import createApp from '@shopify/app-bridge';
 import { Provider } from '@shopify/app-bridge-react';
-import { Redirect } from '@shopify/app-bridge/actions';
 import { AppProvider } from '@shopify/polaris';
 import translations from '@shopify/polaris/locales/ja.json';
 import { initializeApp } from 'firebase/app';
