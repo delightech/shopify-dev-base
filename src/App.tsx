@@ -1,6 +1,4 @@
-import {
- Page, Card, Button,
-} from '@shopify/polaris';
+// import { Page, Card, Button, } from '@shopify/polaris';
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import {
@@ -17,12 +15,6 @@ export const App = () => {
           <ul>
             <li>
               <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
             </li>
           </ul>
         </nav>
