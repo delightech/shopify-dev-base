@@ -17,7 +17,7 @@ import {
   FIREBASE_PROJECT_ID,
   SHOPIFY_API_KEY,
   SHOPIFY_API_SCOPES,
-} from './config';
+} from './configs';
 
 const init = () => {
   // eslint-disable-next-line no-console
