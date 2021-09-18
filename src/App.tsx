@@ -1,21 +1,37 @@
 import {
- AppProvider, Page, Card, Button,
+ Page, Card, Button,
 } from '@shopify/polaris';
-import enTranslations from '@shopify/polaris/locales/ja.json';
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
-
-// eslint-disable-next-line no-alert
-const test = () => { return alert('Button clicked!'); };
+import {
+ BrowserRouter, Route, Switch,
+  Link,
+} from 'react-router-dom';
+import { Home } from './components/Home';
 
 export const App = () => {
   return (
-    <AppProvider i18n={enTranslations}>
-      <Page title="Example app">
-        <Card sectioned>
-          <Button onClick={test}>Example button</Button>
-        </Card>
-      </Page>
-    </AppProvider>
+    <BrowserRouter>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 };
