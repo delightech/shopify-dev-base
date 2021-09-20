@@ -1,3 +1,4 @@
+// コメント記述のためにjsで書く
 module.exports = {
   env: {
     browser: true,
@@ -29,38 +30,26 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'jest', 'jsx-a11y', 'prefer-arrow', 'react', 'react-hooks'],
   root: true, // 親ディレクトリの設定ファイルを読み込まないように設定
   rules: {
-    'object-shorthand': [2, 'never'],
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    // オブジェクト内でkeyとvalueの変数が同じ場合でもkeyの記述を省略しない
+    'object-shorthand': ['error', 'never'],
+    // 関数の中括弧を省略しない
     'arrow-body-style': ['error', 'always'],
-    'sort-imports': 0,
-    'import/order': [2, { alphabetize: { order: 'asc' } }],
+    'sort-imports': 'off',
     'newline-before-return': 'warn',
     'no-console': 'warn',
     'no-continue': 'off',
-    quotes: [
-      'warn',
-      'single',
-      {
-        avoidEscape: true,
-      },
-    ],
+    // シングルクォート指定。文字列中のダブルクォートとテンプレート文字列を許可
+    quotes: ['warn', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+    // ジェネレータ関数のyield省略を禁止
     'require-yield': 'error',
-    semi: ['warn', 'always'],
-    'spaced-comment': [
-      'error',
-      'always',
-      {
-        markers: ['/'],
-      },
-    ],
-    // @typescript-eslint
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    indent: 'off',
-    '@typescript-eslint/indent': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/prefer-interface': 'off',
-    // airbnb
+    // セミコロンは常に付与。preitierでフォーマットしてしまうので強制する。
+    semi: ['error', 'always'],
+    // indent:2。prettierでフォーマットしてしまうので強制する
+    indent: ['error', 2],
+    // disallow certain syntax forms
+    // https://eslint.org/docs/rules/no-restricted-syntax
+    // eslint-config-airbnb-base/rules/style.js で定義されている内、for ofのみ除外して定義する
+    // for ofを除外すると生産性に影響しそうなので残し、それ以外の設定を引き継ぐ。
     'no-restricted-syntax': [
       'error',
       {
@@ -77,6 +66,15 @@ module.exports = {
         message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       },
     ],
+
+    // @typescript-eslint
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/prefer-interface': 'off',
+
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [
       'warn',
@@ -100,9 +98,10 @@ module.exports = {
       },
     ],
     'react/prop-types': 'off',
-    // react hooks
+    // react-hooks
     'react-hooks/rules-of-hooks': 'error',
     // import
+    'import/order': ['error', { alphabetize: { order: 'asc' } }],
     'import/extensions': [
       'error',
       'ignorePackages',
