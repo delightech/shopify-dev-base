@@ -2,7 +2,9 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import {
- BrowserRouter, Route, Switch,
+  BrowserRouter,
+  Route,
+  Switch,
   Link,
 } from 'react-router-dom';
 import { Home } from './components/Home';
