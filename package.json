@@ -30,7 +30,7 @@
   },
   "scripts": {
     "ci": "rm -rf ./node_modules && yarn install && typesync && yarn install --ignore-scripts",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "yarn run build && firebase deploy --only hosting",
     "em": "firebase emulators:start & npx nf start",
     "start": "react-scripts start",
     "build": "react-scripts build",
