@@ -14,7 +14,7 @@ const testFunc = functions
     functions.logger.debug('testFunc!!!');
     console.log('test');
     response.send('Hello from Firebase!');
-});
+  });
 export {
   testFunc,
   callbackFromAuth,
