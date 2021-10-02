@@ -35,8 +35,10 @@ const init = () => {
   };
 
   if (window.top === window.self) {
+    console.log('initialize app!');
     window.location.assign(permissionUrl);
   } else {
+    console.log('create app!');
     const app = createApp(config);
     Redirect.create(app).dispatch(Redirect.Action.APP, '/');
   }
