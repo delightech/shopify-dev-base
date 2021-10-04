@@ -2,9 +2,9 @@ import * as functions from 'firebase-functions';
 import 'firebase-functions';
 import ShopifyToken from 'shopify-token';
 import {
-  FIREBASE_PROJECT_ID,
+  FIREBASE_FUNCTION_URL,
   SHOPIFY_API_KEY,
-  SHOPIFY_SHARED_SECRET,
+  SHOPIFY_SECRET,
 } from './configs';
 
 export const verifyHmac = functions
@@ -12,20 +12,23 @@ export const verifyHmac = functions
   .runWith({ timeoutSeconds: 60, memory: '128MB' })
   .https.onRequest(async (request, response) => {
     functions.logger.info('###verifyHmac###', request);
-    functions.logger.debug(SHOPIFY_SHARED_SECRET, SHOPIFY_API_KEY);
+    functions.logger.debug(SHOPIFY_SECRET, SHOPIFY_API_KEY);
 
     // hmacの検証だけ行うのでredirectUriは何でも良い（空だとエラー）
     const shopifyToken = new ShopifyToken({
       redirectUri: 'http://localhost:8080/callback',
-      sharedSecret: SHOPIFY_SHARED_SECRET,
+      sharedSecret: SHOPIFY_SECRET,
       apiKey: SHOPIFY_API_KEY,
     });
 
-    response.set('Access-Control-Allow-Origin', `https://${FIREBASE_PROJECT_ID}.firebaseapp.com`);
+    response.set('Access-Control-Allow-Origin', FIREBASE_FUNCTION_URL);
     if (shopifyToken.verifyHmac(request.query)) {
+      functions.logger.debug('#####TEST1#####');
       // 自分のfirebase projectからのアクセスのみ許可する
       response.status(200).send('Valid hmac parameter');
     } else {
+      functions.logger.debug('#####TEST2#####');
+      // 自分のfirebase projectからのアクセスのみ許可する
       response.status(400).send('Invalid hmac parameter');
     }
   });
