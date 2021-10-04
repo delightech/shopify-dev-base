@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    // "traceResolution": true,      // 各種名前解決の様子をログに残してくれる. 様子を追うときに利用した
+    "typeRoots": [
+      "node_modules/@types",         // デフォルトではここだけ読む.忘れず書き添える
+    ],
     "target": "es5",
     "lib": [
       "dom",

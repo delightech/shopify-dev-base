@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import 'firebase-functions';
 import ShopifyToken from 'shopify-token';
 import {
   SHOPIFY_API_KEY, SHOPIFY_APP_NAME, SHOPIFY_SHARED_SECRET,
@@ -13,10 +14,10 @@ export const callbackFromAuth = functions
   .runWith({ timeoutSeconds: 60, memory: '128MB' })
   .https.onRequest(async (request, response) => {
     functions.logger.info('###callbackFromAuth###', request);
-    functions.logger.debug(SHOPIFY_SHARED_SECRET, SHOPIFY_API_KEY);
 
+    // redirectUriは使わないが空ではエラーになるので適当に設定しておく
     const shopifyToken = new ShopifyToken({
-      redirectUri: 'https://example.com',
+      redirectUri: 'http://localhost:8080/callback',
       sharedSecret: SHOPIFY_SHARED_SECRET,
       apiKey: SHOPIFY_API_KEY,
     });
