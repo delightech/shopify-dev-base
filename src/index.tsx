@@ -1,5 +1,6 @@
 import createApp from '@shopify/app-bridge';
 import { Provider } from '@shopify/app-bridge-react';
+import { Redirect } from '@shopify/app-bridge/actions';
 import { AppProvider } from '@shopify/polaris';
 import translations from '@shopify/polaris/locales/ja.json';
 import axios from 'axios';
@@ -41,15 +42,19 @@ const init = async () => {
   }
   // ここでpermissionUrlへリダイレクトしてしまうとリダイレクトループになるので注意
 
-  console.log('create app!');
+  // eslint-disable-next-line no-console
+  console.log(`request to: ${FIREBASE_FUNCTION_URL}/testFunc`);
   // propsでコンポーネントにわたしていくのが良さそう。toastなど、app bridgeの機能を使う上で必要
   const app = createApp(config);
+  Redirect.create(app).dispatch(Redirect.Action.APP, '/');
 
   // functionsでhmac検証をする
   // hmacの検証はshopify appのsecret keyを利用してサーバーサイドで行う
   try {
+    await axios.get(`${FIREBASE_FUNCTION_URL}/testFunc`);
     await axios.get(`${FIREBASE_FUNCTION_URL}/verifyHmac${window.location.search}`);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
 
     return;

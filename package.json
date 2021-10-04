@@ -24,9 +24,9 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "fconfig": "firebase functions:config:get > ./functions/.runtimeconfig.json",
     "yci": "rm -rf ./node_modules && yarn install && typesync && yarn install --ignore-scripts",
-    "deploy": "yarn run build && firebase deploy --only hosting,functions",
+    "yconfig": "yarn config set scripts-prepend-node-path true",
+    "deploy": "yarn run build && firebase deploy --only hosting",
     "em": "firebase emulators:start & npx nf start",
     "start": "react-scripts start",
     "build": "react-scripts build",

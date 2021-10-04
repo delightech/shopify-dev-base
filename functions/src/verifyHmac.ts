@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import 'firebase-functions';
 import ShopifyToken from 'shopify-token';
 import {
-  FIREBASE_FUNCTION_URL,
+  FIREBASE_HOSTING_URL,
   SHOPIFY_API_KEY,
   SHOPIFY_SECRET,
 } from './configs';
@@ -17,11 +17,11 @@ export const verifyHmac = functions
     // hmacの検証だけ行うのでredirectUriは何でも良い（空だとエラー）
     const shopifyToken = new ShopifyToken({
       redirectUri: 'http://localhost:8080/callback',
-      sharedSecret: SHOPIFY_SECRET,
-      apiKey: SHOPIFY_API_KEY,
+      sharedSecret: SHOPIFY_SECRET as string,
+      apiKey: SHOPIFY_API_KEY as string,
     });
 
-    response.set('Access-Control-Allow-Origin', FIREBASE_FUNCTION_URL);
+    response.set('Access-Control-Allow-Origin', FIREBASE_HOSTING_URL as string);
     if (shopifyToken.verifyHmac(request.query)) {
       functions.logger.debug('#####TEST1#####');
       // 自分のfirebase projectからのアクセスのみ許可する
