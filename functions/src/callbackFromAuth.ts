@@ -3,7 +3,7 @@ import * as functions from 'firebase-functions';
 import 'firebase-functions';
 import ShopifyToken from 'shopify-token';
 import {
-  SHOPIFY_API_KEY, SHOPIFY_APP_NAME, SHOPIFY_SHARED_SECRET,
+  SHOPIFY_API_KEY, SHOPIFY_APP_NAME, SHOPIFY_SECRET,
 } from './configs';
 
 // example url
@@ -18,7 +18,7 @@ export const callbackFromAuth = functions
     // redirectUriは使わないが空ではエラーになるので適当に設定しておく
     const shopifyToken = new ShopifyToken({
       redirectUri: 'http://localhost:8080/callback',
-      sharedSecret: SHOPIFY_SHARED_SECRET,
+      sharedSecret: SHOPIFY_SECRET,
       apiKey: SHOPIFY_API_KEY,
     });
 

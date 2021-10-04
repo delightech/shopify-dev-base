@@ -127,3 +127,15 @@ yarn-debug.log*
 yarn-error.log*
 
 .firebase/
+
+# Compiled JavaScript files
+functions/lib/**/*.js
+functions/lib/**/*.js.map
+
+# TypeScript v1 declaration files
+functions/typings/
+
+functions/node_modules/
+
+functions/.runtimeconfig.json
+functions/setConfigs.sh
