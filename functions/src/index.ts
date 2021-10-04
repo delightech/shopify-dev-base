@@ -3,7 +3,7 @@ import * as functions from 'firebase-functions';
 import 'firebase-functions';
 import { callbackFromAuth } from './callbackFromAuth';
 import {
-  FIREBASE_FUNCTION_URL,
+  FIREBASE_HOSTING_URL,
 } from './configs';
 import { verifyHmac } from './verifyHmac';
 
@@ -17,7 +17,7 @@ const testFunc = functions
     functions.logger.debug(request.query);
     functions.logger.debug(new Date());
     // 自分のfirebase projectからのアクセスのみ許可する
-    response.set('Access-Control-Allow-Origin', FIREBASE_FUNCTION_URL);
+    response.set('Access-Control-Allow-Origin', FIREBASE_HOSTING_URL as string);
     response.send('Hello from Firebase!');
   });
 
